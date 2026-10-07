@@ -1,8 +1,12 @@
 import type { NextConfig } from "next";
 
+const isGithubActions = process.env.GITHUB_ACTIONS || false;
+
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: "/portfolio",
+  // Apply /portfolio subpath only when running inside GitHub Actions
+  basePath: isGithubActions ? "/portfolio" : "",
+  assetPrefix: isGithubActions ? "/portfolio/" : "",
   images: {
     unoptimized: true,
   },
